@@ -108,8 +108,7 @@ class ActivationWindow(QMainWindow):
     def switch_to_error_widget(self):
         self.move(self.x()-(490-self.width())//2, self.y()-(375-self.height())//2)
         self.setFixedSize(490, 375)         
-        self.stacked_widget.setCurrentIndex(WindowState.ACTIVATION_ERROR.value)
-        
+        self.stacked_widget.setCurrentIndex(WindowState.ACTIVATION_ERROR.value)        
     
     def switch_to_splash_screen_widget(self):
         self.move(self.x()-(490-self.width())//2, self.y()-(200-self.height())//2)
@@ -134,11 +133,11 @@ class ActivationWindow(QMainWindow):
                 self.is_dragging = False
 
     def mouseMoveEvent(self, event):       
-        if self.oldPos and self.is_dragging:         
+        if self.oldPos and self.is_dragging:                     
             delta = QPoint(event.globalPos() - self.oldPos)
             self.move(self.x() + delta.x(), self.y() + delta.y())
             self.oldPos = event.globalPos()  
-                 
+
 
 class ActivationMessageWidget(QWidget):
     

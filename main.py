@@ -76,6 +76,10 @@ def resolve_image_file():
 if __name__ == '__main__':           
     app = QApplication(sys.argv) 
 
+    os.environ["QT_ENABLE_HIGHDPI_SCALING"]   = '1'
+    os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = '1'
+    os.environ["QT_SCALE_FACTOR"]             = '1'
+
     icon_file = resolve_icon_file()
     image_file = resolve_image_file()
     

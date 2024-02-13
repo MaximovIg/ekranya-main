@@ -72,13 +72,15 @@ def resolve_image_file():
     except FileNotFoundError:
         raise
 
-
-if __name__ == '__main__':           
+import ctypes
+if __name__ == '__main__': 
+    #disable DPI scaling
+    awareness = ctypes.c_int()
+    errorCode = ctypes.windll.shcore.GetProcessDpiAwareness(0, ctypes.byref(awareness))
+    print(awareness.value)
+    errorCode = ctypes.windll.shcore.SetProcessDpiAwareness(0)   
+        
     app = QApplication(sys.argv) 
-
-    os.environ["QT_ENABLE_HIGHDPI_SCALING"]   = '1'
-    os.environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = '1'
-    os.environ["QT_SCALE_FACTOR"]             = '1'
 
     icon_file = resolve_icon_file()
     image_file = resolve_image_file()

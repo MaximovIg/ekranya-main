@@ -1,6 +1,8 @@
+import sys
 import requests
 import subprocess
 import time
+
 from PyQt5.QtCore import QSettings, pyqtSignal, QObject
 
 class WebApi(QObject):
@@ -54,7 +56,10 @@ class WebApi(QObject):
             self.adding_activation_finished.emit(False)
         
     def get_machine_id(self):
-        startupinfo = subprocess.STARTUPINFO()
-        startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-        uuid = str(subprocess.check_output('wmic csproduct get UUID', startupinfo=startupinfo), 'utf-8').split('\n')[1].strip()
-        return uuid
+        if sys.platform == 'win32':
+            startupinfo = subprocess.STARTUPINFO()
+            startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+            uuid = str(subprocess.check_output('wmic csproduct get UUID', startupinfo=startupinfo), 'utf-8').split('\n')[1].strip()
+            return uuid
+        else:
+            return ''
